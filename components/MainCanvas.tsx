@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, Play, Pause, Volume2, Maximize2 } from 'lucide-react'
+import { Upload, Play, Pause, Maximize2 } from 'lucide-react'
 import { useRef, useState } from 'react'
 
 interface MainCanvasProps {
@@ -35,9 +35,9 @@ export default function MainCanvas({
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
+    <div className="flex-1 flex flex-col gap-4 p-6">
       {/* Canvas Display */}
-      <div className="flex-1 bg-dark-800 rounded-xl border border-dark-700 overflow-hidden flex items-center justify-center relative group">
+      <div className="flex-1 bg-dark-800 rounded-xl border border-neon-cyan/30 overflow-hidden flex items-center justify-center relative group hover:border-neon-cyan/60 transition-all duration-300">
         {uploadedMedia ? (
           <div className="w-full h-full relative">
             {selectedTab === 'video' ? (
@@ -49,22 +49,22 @@ export default function MainCanvas({
                   onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
                 />
                 {/* Video Controls Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 gap-3">
-                  <div className="bg-dark-800/90 rounded-lg p-4 space-y-3">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 gap-3">
+                  <div className="glass-effect p-4 space-y-3">
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setIsPlaying(!isPlaying)}
-                        className="p-2 bg-accent-pink rounded-lg hover:bg-opacity-80 transition-colors"
+                        className="p-2 bg-gradient-primary rounded-lg hover:shadow-neon-pink transition-all duration-200 text-white"
                       >
                         {isPlaying ? <Pause size={20} /> : <Play size={20} />}
                       </button>
-                      <span className="text-sm text-gray-400">
+                      <span className="text-sm text-accent-cyan">
                         {Math.floor(currentTime)}s / {Math.floor(videoDuration)}s
                       </span>
                     </div>
-                    <div className="w-full bg-dark-700 rounded-full h-2">
+                    <div className="w-full bg-dark-700 rounded-full h-2 border border-neon-cyan/30">
                       <div
-                        className="bg-gradient-primary h-2 rounded-full"
+                        className="bg-gradient-primary h-2 rounded-full shadow-neon-cyan"
                         style={{
                           width: `${(currentTime / videoDuration) * 100}%`,
                         }}
@@ -78,12 +78,12 @@ export default function MainCanvas({
             )}
           </div>
         ) : (
-          <div className="text-center space-y-4">
-            <div className="w-16 h-16 bg-gradient-primary/20 rounded-2xl flex items-center justify-center mx-auto">
+          <div className="text-center space-y-4 p-8">
+            <div className="w-16 h-16 bg-gradient-neon/20 rounded-2xl flex items-center justify-center mx-auto shadow-neon-cyan/50">
               <Upload className="text-accent-cyan" size={32} />
             </div>
             <div>
-              <h3 className="text-xl font-semibold text-white mb-2">
+              <h3 className="text-xl font-semibold text-gradient-neon mb-2">
                 {selectedTab === 'image' && 'Upload an Image'}
                 {selectedTab === 'video' && 'Upload a Video'}
                 {selectedTab === 'voice' && 'Record or Upload Audio'}
@@ -96,7 +96,7 @@ export default function MainCanvas({
             </div>
             <button
               onClick={handleUploadClick}
-              className="px-6 py-2 bg-gradient-primary rounded-lg text-white font-medium hover:shadow-neon-purple transition-all duration-200"
+              className="btn-neon-primary"
             >
               Choose File
             </button>
@@ -113,17 +113,17 @@ export default function MainCanvas({
         {/* Action Buttons */}
         {uploadedMedia && (
           <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-            <button className="p-2 bg-dark-800/80 hover:bg-dark-700 rounded-lg transition-colors">
+            <button className="p-2 bg-dark-800/80 hover:bg-dark-700 rounded-lg transition-all duration-200 border border-neon-cyan/30 hover:border-neon-cyan/60 hover:shadow-neon-cyan">
               <Maximize2 size={20} className="text-accent-cyan" />
             </button>
           </div>
         )}
       </div>
 
-      {/* Video/Audio Timeline Info */}
-      <div className="bg-dark-800 rounded-lg p-4 text-sm text-gray-400">
+      {/* Info Bar */}
+      <div className="bg-dark-800 rounded-lg p-4 text-sm border border-neon-purple/30 text-gray-400">
         {uploadedMedia ? (
-          <p>Media loaded • 1080p HD • Ready to process</p>
+          <p className="text-accent-cyan">✓ Media loaded • 1080p HD • Ready to process</p>
         ) : (
           <p>No media uploaded yet</p>
         )}
