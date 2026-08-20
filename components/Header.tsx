@@ -1,15 +1,11 @@
+import Logo from '@/components/Logo'
 import { Menu, Bell, User, Settings } from 'lucide-react'
 
 export default function Header() {
   return (
     <header className="bg-dark-800 border-b border-dark-700 px-6 py-4 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center text-sm font-bold">
-          AI
-        </div>
-        <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-          Photo Video Motion Studio.ai
-        </h1>
+      <div className="flex items-center gap-4">
+        <Logo size="sm" variant="full" />
       </div>
 
       <div className="flex items-center gap-6">
